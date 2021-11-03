@@ -1,0 +1,143 @@
+<mat-grid-list cols="2" rowHeight="1:0.8">
+    <!--LEFT GRID-->
+    <!--Queues states-->
+    <mat-grid-tile class="queue-tile">
+        <div class="q-grid">
+            <!--nested grid-->
+            <mat-grid-list cols="3" rowHeight="1:1.4">
+                <!--Calls Answered w/ centre text = calls offered #GREEN-->
+                <mat-grid-tile>
+                    <div class="svg-item">
+                        <h1 class="circles-header">Calls Answered</h1>
+                        <svg width="100%" height="100%" viewBox="0 0 40 40" class="donut">
+                            <circle class="donut-hole" cx="20" cy="20" r="15.91549430918954" fill="#fff"></circle>
+                            <circle class="donut-ring" cx="20" cy="20" r="15.91549430918954" fill="transparent" stroke-width="3.5"></circle>
+                            <!--interpolate values for stroke-dasharray fill:not-filled-->
+                            <circle class="donut-segment donut-segment-2" cx="20" cy="20" r="15.91549430918954" fill="transparent" stroke-width="3.5" attr.stroke-dasharray="{{anF}} {{anE}}" stroke-dashoffset="25"></circle>
+                            <g class="donut-text donut-text-1">
+                                
+                                <text y="50%" transform="translate(0, 2)">
+                                    <!--Interpolate answered percent value here-->
+                                    <tspan x="50%" text-anchor="middle" class="donut-percent">{{q[aQ].answeredConversationsByAgentGroup1Today}}</tspan>   
+                                </text>
+                                <text y="60%" transform="translate(0, 2)">
+                                    <!--interpolate total offered value here-->
+                                    <tspan x="50%" text-anchor="middle" class="donut-data">{{q[aQ].offeredConversationsToday}} offered</tspan>   
+                                </text>
+                            </g>
+                        </svg>
+                    </div>
+                </mat-grid-tile>
+                <!--Calls Waiting w/ centre text = calls offered #BLUE-->
+                <mat-grid-tile>
+                    <div class="svg-item">
+                        <h1 class="circles-header">Calls Waiting</h1>
+                        <svg width="100%" height="100%" viewBox="0 0 40 40" class="donut">
+                            <circle class="donut-hole" cx="20" cy="20" r="15.91549430918954" fill="#fff"></circle>
+                            <circle class="donut-ring" cx="20" cy="20" r="15.91549430918954" fill="transparent" stroke-width="3.5"></circle>
+                            <!--interpolate values for stroke-dasharray fill:not-filled | https://stackoverflow.com/a/53911736/14369396-->
+                            <circle class="donut-segment donut-segment-3" cx="20" cy="20" r="15.91549430918954" fill="transparent" stroke-width="3.5" attr.stroke-dasharray="{{cwF}} {{cwE}}" stroke-dashoffset="25"></circle>
+                            <g class="donut-text donut-text-1">
+                                
+                                <text y="50%" transform="translate(0, 2)">
+                                    <!--Interpolate waiting percent value here-->
+                                    <tspan x="50%" text-anchor="middle" class="donut-percent">{{q[aQ].waitingConversations}}</tspan>   
+                                </text>
+                            </g>
+                        </svg>
+                    </div>
+                </mat-grid-tile>
+                <!--Calls Abandoned w/ centre text = calls offered #RED-->
+                <mat-grid-tile>
+                    <div class="svg-item">
+                        <h1 class="circles-header">Calls Abandoned</h1>
+                        <svg width="100%" height="100%" viewBox="0 0 40 40" class="donut">
+                            <circle class="donut-hole" cx="20" cy="20" r="15.91549430918954" fill="#fff"></circle>
+                            <circle class="donut-ring" cx="20" cy="20" r="15.91549430918954" fill="transparent" stroke-width="3.5"></circle>
+                            <!--interpolate values for stroke-dasharray fill:not-filled-->
+                            <circle class="donut-segment donut-segment-4" cx="20" cy="20" r="15.91549430918954" fill="transparent" stroke-width="3.5" attr.stroke-dasharray="{{abF}} {{abE}}" stroke-dashoffset="25"></circle>
+                            <g class="donut-text donut-text-1">
+                                
+                                <text y="50%" transform="translate(0, 2)">
+                                    <!--Interpolate abandoned percent value here-->
+                                    <tspan x="50%" text-anchor="middle" class="donut-percent">{{q[aQ].abandonedConversationsToday}}</tspan>   
+                                </text>
+                                <text y="60%" transform="translate(0, 2)">
+                                    <!--interpolate total offered value here-->
+                                    <tspan x="50%" text-anchor="middle" class="donut-data">{{q[aQ].offeredConversationsToday}} offered</tspan>   
+                                </text>
+                            </g>
+                        </svg>
+                    </div>
+                </mat-grid-tile>
+            </mat-grid-list>
+            <!--Vital stats-->
+            <mat-grid-list cols="3" rowHeight="5:1">
+                <mat-grid-tile [colspan]=3>
+                    <span><h2 class="info-header">Service level: <span [style.color]="slc">{{q[aQ].serviceLevelPercentageToday}}%</span></h2></span>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]=3>
+                    <span><h2 class="info-header">Estimated wait time: <span [style.color]="'purple'">{{q[aQ].estimatedWaitTimeForNewConversations}}</span></h2></span>
+                </mat-grid-tile>
+            </mat-grid-list>
+
+            <!--Agents available-->
+            <mat-grid-list cols="3" rowHeight="5:1">
+                <mat-grid-tile [colspan]=3 [style.backgroundColor]="'lightgray'" [style.textAlign]="'center'" [style.borderBottom]="'solid lightgray 2px'">
+                    <h1 class="info-header">Agents at a glance</h1>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]=3 [style.backgroundColor]="'lightgray'" [style.borderTop]="'solid lightgray 2px'">
+                        <div *ngIf="avIdle" class="idle-agents" [style.textAlign]="'center'" [style.width.pc]="avIdle" [style]="'height: 25px'"> {{q[aQ].agentsIdle}} idle</div>
+                        <div *ngIf="avAcd" class="busy-agents" [style.textAlign]="'center'" [style.width.pc]="avAcd" [style]="'color: white; height: 25px'"> {{q[aQ].agentsOnAcdConversations}} busy</div>
+                        <div *ngIf="avNonAcd" class="nonacd-agents" [style.textAlign]="'center'" [style.width.pc]="avNonAcd" [style]="'color: white; height: 25px'"> {{q[aQ].agentsOnNonAcdConversations}} non-acd</div>
+                        <div *ngIf="avUn" class="unavail-agents" [style.textAlign]="'center'" [style.width.pc]="avUn" [style]="'color: white; height: 25px'"> {{q[aQ].agentsUnavailable}} unavailable</div>
+                        <div *ngIf="!avIdle && !avAcd && !avNonAcd && !avUn">No agents logged in</div>
+                </mat-grid-tile>
+            </mat-grid-list>
+        </div>
+        <mat-grid-tile-header class="tile-header-q">
+            <span>
+                <button mat-icon-button [matMenuTriggerFor]="menuQ">
+                    <mat-icon>more_vert</mat-icon>
+                </button> 
+                {{q[aQ].name}} 
+                <mat-menu #menuQ="matMenu">
+                    <button *ngFor="let a of queuesStateDbcnv._embedded.items; let i = index" mat-menu-item (click)="qSelect(i)">{{a.name}}</button>
+                </mat-menu>
+            </span>
+        </mat-grid-tile-header>
+    </mat-grid-tile>
+    
+    <!--RIGHT GRID-->
+    <!--Agents states-->
+    <mat-grid-tile class="agents-tile">
+        <div>
+            <div class="agents">
+                <div *ngFor="let d of agentsStateDbcnv._embedded.items" class="agent-ind">
+                    <div [ngSwitch]="d.currentState">
+                        <!--https://stackoverflow.com/questions/52558611/angular-6-grid-tiles-line-breaks-->
+                        <!--https://stackoverflow.com/questions/46639498/style-border-error-in-angular4-->
+                        <!--'Incoming'-->
+                        <img *ngSwitchCase="'LoggedOut'" src="../../assets/blank_avatar.png" class="agent-pic agent-loggedout" matTooltip="{{d.currentState}}">
+                        <img *ngSwitchCase="'Idle'" src="../../assets/blank_avatar.png" class="agent-pic agent-idle" matTooltip="{{d.currentState}}">
+                        <img *ngSwitchCase="'MakeBusy'" src="../../assets/blank_avatar.png" class="agent-pic agent-makebusy" matTooltip="{{d.currentState}}">
+                        <img *ngSwitchCase="'Acd'" src="../../assets/blank_avatar.png" class="agent-pic agent-acd" matTooltip="{{d.currentState}}">
+                        <img *ngSwitchCase="'NonAcd'" src="../../assets/blank_avatar.png" class="agent-pic agent-nonacd" matTooltip="{{d.currentState}}">
+                        <img *ngSwitchCase="'WorkTimer'" src="../../assets/blank_avatar.png" class="agent-pic agent-worktimer" matTooltip="{{d.currentState}}">
+                        <img *ngSwitchCase="'Incoming'" src="../../assets/blank_avatar.png" class="agent-pic agent-ringing" matTooltip="{{d.currentState}}">
+                        <!--Default if state not of the above-->
+                        <img *ngSwitchDefault src="../../assets/blank_avatar.png" class="agent-pic" matTooltip="{{d.currentState}}">
+                        <p>
+                            {{d.firstName}} {{d.lastName}}
+                            <br>
+                            <span class="agent-time-entered">{{d.enteredStateOn | date: 'medium'}}</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <mat-grid-tile-header class="tile-header-q">
+            <span>Agents</span>
+        </mat-grid-tile-header>
+    </mat-grid-tile>
+</mat-grid-list>
