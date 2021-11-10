@@ -1,0 +1,12 @@
+<div class="main">
+    <div *ngIf="checkToken() | async as tk; else gohome" class="content">
+        <div *ngIf="tk !== null">
+            <h1>You are logged in</h1>
+            <br>
+            <button mat-flat-button [routerLink]="'../home'" color="primary">Home page</button>
+        </div>
+    </div>
+    <ng-template #gohome class="content">
+        <h1>You need to connect. Use the button at the top</h1>
+    </ng-template>
+</div>

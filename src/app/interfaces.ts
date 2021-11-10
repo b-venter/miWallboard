@@ -3,6 +3,13 @@ Most of these interfaces were created by running the API call, copying the retur
 https://app.quicktype.io/. 
 A few naming changes had to be done for QItem and QItemLinks
 */
+
+export interface tokenData {
+    access_token: string;
+    token_type: string;
+    expires_in: number;
+}
+
 export interface AgentsStates {
     _links:    AgentsStatesLinks;
     count:     number;

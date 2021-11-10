@@ -1,17 +1,41 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-import { Observable, timer } from 'rxjs';
-import { switchMap } from 'rxjs/operators';
+import { Observable, of, Subject, timer } from 'rxjs';
+import { retry, share, switchMap, takeUntil } from 'rxjs/operators';
+
+import { tokenData } from './interfaces';
 
 @Injectable({
   providedIn: 'root'
 })
-export class DataService {
+export class DataService implements OnDestroy {
   micc: string = "http://10.49.0.13/";
-  oauthtkn: string = "geECwmVQ7ShDkYp3T97MKhuW7NbEIGaWvHZqUvotAE2ev_OAX55EMDh_7rrGa3CqfRU99hjtkkuWo1LxyzvWEDeSNBd7pPyC-2YABqN2twaiC_CIdc3-S28BA-Uhb8acUR9DGmefSteTZuikVYklaIvmri5W-O7Dg-Ag_2aO5swaTN11PGbA7buAdbSvvkNnZDwyok0xiPXS050DKq7jxI0GXQ8NzCZ1xO1IuQUNaO7yDqvINR_RzBCe7G4d4yRIymVyjmxTjWAoYWNGyjlQVa5N7XzJRh-8LIhmhSMrjumvIvj0woFLc_GtafgmTuUPJT0uQo2bVI78t42ns-4qELVyVv67Aty4B2dBa63yWAxY6E6LaJFHZ0tmAQnPCH1OY38SdqDmCujl8iqe9gNyCILCSbU2OQXlbjCT02LzkdS25Ye2GK_jD2n9GaWL1T1PgkBksv1tBgAZrWkfU7jFB-glQiMxsC4Q8PHJQc2e-WjlmddnIRU_qwHR71XQyvhv7_K6jQgz-VwJOQ4nOFTpy5EjIOUZCxpmVdGBzARJ_7yv_C-ubMP3WAvYFYccYJdWk0gmB-PQalM_7oqZ7jhiuFMQGmb7yBWrjmL97vPfGmN--icO8EwfUXwIr2aiAHSRkzRpF4sqxcdj9F-LoL46MLI8mPo";
 
-  constructor(private http: HttpClient) { }
+  //oauthtkn:
+  get oauthtkn() {return localStorage.getItem('wbToken');}
+
+  private stopPolling = new Subject();
+
+  constructor(private http: HttpClient) {}
+
+  //GET Token
+  getToken() {
+    let header = new HttpHeaders({ "Content-Type": "application/x-www-form-urlencoded", });
+    const requestOptions = { headers: header};
+    //var body = "grant_type=password&username=_admin&password=_password";
+    var body = "grant_type=password&username=wallboard&password=abTyefAdarchesh0";
+
+    this.http.post<tokenData>(this.micc + "AuthorizationServer/Token", body, requestOptions).subscribe(
+      oauth => localStorage.setItem('wbToken', oauth.access_token),
+      () => console.error("Failed to get token."),
+    );
+  }
+
+  //Clear token
+  delToken(){
+    localStorage.removeItem('wbToken');
+  }
 
   //GET AGENTS STATE
   getAgentsState(): Observable<any[]> {
@@ -25,7 +49,10 @@ export class DataService {
       //1000 = 1 second, 60000 = 1 minute
       switchMap(
         () => this.http.get<any[]>(this.micc + "MiccSdk/api/v1/agents/states", requestOptions)
-      )
+      ),
+      retry(),
+      share(),
+      takeUntil(this.stopPolling)
     );
 
     //Alternate return for once-off (non-polling) test
@@ -43,8 +70,15 @@ export class DataService {
       //1000 = 1 second, 60000 = 1 minute
       switchMap(
         () => this.http.get<any[]>(this.micc + "MiccSdk/api/v1/queues/state", requestOptions)
-      )
+      ),
+      retry(),
+      share(),
+      takeUntil(this.stopPolling)
     );
   }
+
+  ngOnDestroy() {
+    this.stopPolling.next();
+ }
 
 }

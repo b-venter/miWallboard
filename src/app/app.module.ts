@@ -14,14 +14,16 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatIconModule } from '@angular/material/icon'; 
 import { MatMenuModule } from '@angular/material/menu';
-import { MatButtonModule } from '@angular/material/button'; 
+import { MatButtonModule } from '@angular/material/button';
+import { ConnectComponent } from './connect/connect.component'; 
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     PageNotFoundComponent,
-    NavbarComponent
+    NavbarComponent,
+    ConnectComponent
   ],
   imports: [
     BrowserModule,
