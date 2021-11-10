@@ -3,10 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { HomeComponent }  from './home/home.component';
 import { PageNotFoundComponent }  from './page-not-found/page-not-found.component';
+import { ConnectComponent } from './connect/connect.component';
+
+import { TokenService } from './token.service';
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent },
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: 'home', component: HomeComponent, canActivate:[TokenService] },
+  { path: 'connect', component: ConnectComponent },
+  { path: '', redirectTo: '/connect', pathMatch: 'full' },
   { path: '**', component: PageNotFoundComponent }
 ];
 

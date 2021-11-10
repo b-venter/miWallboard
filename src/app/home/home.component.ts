@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { interval } from 'rxjs';
 
 import { DataService } from '../data.service';
 import { AgentsStates, QItem, QueuesState } from '../interfaces';
@@ -34,6 +35,7 @@ export class HomeComponent implements OnInit {
   queuesStateDb: any[] = [];
   queuesStateDbcnv!: QueuesState;
   q: QItem[];
+
 
   constructor(
     private dataService: DataService,
