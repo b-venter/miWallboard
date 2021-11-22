@@ -6,25 +6,37 @@ import { retry, share, switchMap, takeUntil } from 'rxjs/operators';
 
 import { tokenData } from './interfaces';
 
+/*This is to read the settings from our conf file */
+import { AppConfig } from './app.config';
+
 @Injectable({
   providedIn: 'root'
 })
 export class DataService implements OnDestroy {
-  micc: string = "http://10.49.0.13/";
 
   //oauthtkn:
   get oauthtkn() {return localStorage.getItem('wbToken');}
 
   private stopPolling = new Subject();
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private config: AppConfig,
+    ) {}
 
+    //micc: string = "http://10.49.0.13/";
+    micc: string = "http://" + this.config.getConfig().serverUrl + "/";
+    uName: string = this.config.getConfig().apiUsername;
+    pWord: string = this.config.getConfig().apiPassword;
+    pollTimer: number = this.config.getConfig().refreshTime * 1000;
+
+  
   //GET Token
   getToken() {
     let header = new HttpHeaders({ "Content-Type": "application/x-www-form-urlencoded", });
     const requestOptions = { headers: header};
-    //var body = "grant_type=password&username=_admin&password=_password";
-    var body = "grant_type=password&username=wallboard&password=abTyefAdarchesh0";
+    //var body = "grant_type=password&username=user&password=password";
+    var body = "grant_type=password&username=" + this.uName + "&password=" + this.pWord;
 
     this.http.post<tokenData>(this.micc + "AuthorizationServer/Token", body, requestOptions).subscribe(
       oauth => localStorage.setItem('wbToken', oauth.access_token),
@@ -45,7 +57,7 @@ export class DataService implements OnDestroy {
     
     //Poll MiCCB server
     //https://blog.angulartraining.com/how-to-do-polling-with-rxjs-and-angular-50d635574965
-    return timer(1, 30000).pipe(
+    return timer(1, this.pollTimer).pipe(
       //1000 = 1 second, 60000 = 1 minute
       switchMap(
         () => this.http.get<any[]>(this.micc + "MiccSdk/api/v1/agents/states", requestOptions)
@@ -66,7 +78,7 @@ export class DataService implements OnDestroy {
     const requestOptions = { headers: header};
     
     //Poll MiCCB server
-    return timer(1, 30000).pipe(
+    return timer(1, this.pollTimer).pipe(
       //1000 = 1 second, 60000 = 1 minute
       switchMap(
         () => this.http.get<any[]>(this.micc + "MiccSdk/api/v1/queues/state", requestOptions)

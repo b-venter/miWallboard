@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { interval } from 'rxjs';
 
 import { DataService } from '../data.service';
 import { AgentsStates, QItem, QueuesState } from '../interfaces';
+
+/*This is to read the settings from our conf file */
+import { AppConfig } from '../app.config';
 
 @Component({
   selector: 'app-home',
@@ -12,7 +14,6 @@ import { AgentsStates, QItem, QueuesState } from '../interfaces';
 export class HomeComponent implements OnInit {
   agentsStateDb: any[] = [];
   agentsStateDbcnv!: AgentsStates;
-  aQ: number = 0; //active Queue chosen to view. Default is zero
 
   //Reference values for 3x circles
   anF: number = 30; //Answer filled
@@ -39,6 +40,7 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private dataService: DataService,
+    private config: AppConfig,
   ) {
     /*Init default values for q, note [] */
     this.q = [
@@ -111,6 +113,8 @@ export class HomeComponent implements OnInit {
       _embedded: {}
     }]
   }
+
+  aQ: number = this.config.getConfig().activeQ; //active Queue chosen to view. Default is zero
 
   ngOnInit(): void {
     this.agentsState();

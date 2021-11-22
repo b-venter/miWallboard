@@ -17,6 +17,14 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 import { ConnectComponent } from './connect/connect.component'; 
 
+import { APP_INITIALIZER } from '@angular/core';
+import { AppConfig }       from './app.config';
+import { Observable } from 'rxjs';
+
+function initConfig(config: AppConfig): () => Observable<any>{
+  return () => config.load();
+}
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +45,10 @@ import { ConnectComponent } from './connect/connect.component';
     MatMenuModule,
     MatButtonModule
   ],
-  providers: [],
+  providers: [
+    AppConfig,
+        { provide: APP_INITIALIZER, useFactory: initConfig, deps: [AppConfig], multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
