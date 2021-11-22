@@ -102,7 +102,7 @@
                 </button> 
                 {{q[aQ].name}} 
                 <mat-menu #menuQ="matMenu">
-                    <button *ngFor="let a of queuesStateDbcnv._embedded.items; let i = index" mat-menu-item (click)="qSelect(i)">{{a.name}}</button>
+                    <button *ngFor="let a of queuesStateDbcnv._embedded.items; let i = index" mat-menu-item (click)="qSelect(i)">{{i}} - {{a.name}}</button>
                 </mat-menu>
             </span>
         </mat-grid-tile-header>

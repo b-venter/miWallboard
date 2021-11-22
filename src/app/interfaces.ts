@@ -173,3 +173,11 @@ export interface QueuesStateLinks {
     self: Self;
 }
 
+export interface settingsFile {
+    refreshTime: number;
+    serverUrl: string;
+    apiUsername: string;
+    apiPassword: string;
+    activeQ: number;
+    wallBanner: string;
+}

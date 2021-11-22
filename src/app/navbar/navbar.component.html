@@ -1,10 +1,9 @@
 <mat-toolbar color="primary">
     <mat-toolbar-row >
-      <span>MiContact Center Business Wallboard</span>
+      <span>{{boardBanner}}</span>
       <button *ngIf="checkToken() | async as tk; else connect" class="button-left" mat-flat-button color="warn" matTooltip="Clear the connection" (click)="clearConn()">Clear</button>
       <ng-template #connect>
         <button class="button-left" mat-flat-button color="accent" matTooltip="Initiate connection" (click)="initConnect()">Connect</button>
       </ng-template>
     </mat-toolbar-row>
 </mat-toolbar>
-  
