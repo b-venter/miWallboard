@@ -117,17 +117,17 @@
                     <div [ngSwitch]="d.currentState">
                         <!--https://stackoverflow.com/questions/52558611/angular-6-grid-tiles-line-breaks-->
                         <!--https://stackoverflow.com/questions/46639498/style-border-error-in-angular4-->
-                        <img *ngSwitchCase="'LoggedOut'" src="../../assets/blank_avatar.png" class="agent-pic agent-loggedout" matTooltip="{{d.currentState}}">
-                        <img *ngSwitchCase="'Idle'" src="../../assets/blank_avatar.png" class="agent-pic agent-idle" matTooltip="{{d.currentState}}">
-                        <img *ngSwitchCase="'MakeBusy'" src="../../assets/blank_avatar.png" class="agent-pic agent-makebusy" matTooltip="{{d.currentState}}">
-                        <img *ngSwitchCase="'Acd'" src="../../assets/blank_avatar.png" class="agent-pic agent-acd" matTooltip="{{d.currentState}}">
-                        <img *ngSwitchCase="'NonAcd'" src="../../assets/blank_avatar.png" class="agent-pic agent-nonacd" matTooltip="{{d.currentState}}">
-                        <img *ngSwitchCase="'WorkTimer'" src="../../assets/blank_avatar.png" class="agent-pic agent-worktimer" matTooltip="{{d.currentState}}">
-                        <img *ngSwitchCase="'Incoming'" src="../../assets/blank_avatar.png" class="agent-pic agent-ringing" matTooltip="{{d.currentState}}">
-                        <img *ngSwitchCase="'AcdHold'" src="../../assets/blank_avatar.png" class="agent-pic agent-acdhold" matTooltip="{{d.currentState}}">
-                        <img *ngSwitchCase="'Outbound'" src="../../assets/blank_avatar.png" class="agent-pic agent-outb" matTooltip="{{d.currentState}}">
+                        <img *ngSwitchCase="'LoggedOut'" src="./assets/blank_avatar.png" class="agent-pic agent-loggedout" matTooltip="{{d.currentState}}">
+                        <img *ngSwitchCase="'Idle'" src="./assets/blank_avatar.png" class="agent-pic agent-idle" matTooltip="{{d.currentState}}">
+                        <img *ngSwitchCase="'MakeBusy'" src="./assets/blank_avatar.png" class="agent-pic agent-makebusy" matTooltip="{{d.currentState}}">
+                        <img *ngSwitchCase="'Acd'" src="./assets/blank_avatar.png" class="agent-pic agent-acd" matTooltip="{{d.currentState}}">
+                        <img *ngSwitchCase="'NonAcd'" src="./assets/blank_avatar.png" class="agent-pic agent-nonacd" matTooltip="{{d.currentState}}">
+                        <img *ngSwitchCase="'WorkTimer'" src="./assets/blank_avatar.png" class="agent-pic agent-worktimer" matTooltip="{{d.currentState}}">
+                        <img *ngSwitchCase="'Incoming'" src="./assets/blank_avatar.png" class="agent-pic agent-ringing" matTooltip="{{d.currentState}}">
+                        <img *ngSwitchCase="'AcdHold'" src="./assets/blank_avatar.png" class="agent-pic agent-acdhold" matTooltip="{{d.currentState}}">
+                        <img *ngSwitchCase="'Outbound'" src="./assets/blank_avatar.png" class="agent-pic agent-outb" matTooltip="{{d.currentState}}">
                         <!--Default if state not of the above-->
-                        <img *ngSwitchDefault src="../../assets/blank_avatar.png" class="agent-pic" matTooltip="{{d.currentState}}">
+                        <img *ngSwitchDefault src="./assets/blank_avatar.png" class="agent-pic" matTooltip="{{d.currentState}}">
                         <p>
                             {{d.firstName}} {{d.lastName}}
                             <br>
