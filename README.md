@@ -33,6 +33,15 @@ In the `assets` folder is a file called **settings.json**. Here is what each ent
 `"wallBanner":` Change at will.  
 
 ## 3 - Hosting with IIS
+[Reference link](https://devblogs.microsoft.com/premier-developer/tips-for-running-an-angular-app-in-iis/)  
+1. Extract the package and copy the directory ("angular-wallboard") to `C:\inetpub\wwwroot`
+2. Using **IIS Manager**, naviage to *Default website* > Right-click > Add
+  - **Alias**: miWallboard  
+  - **Physical path**: `C:\inetpub\wwwroot\angular-wallboard`
+3. Upload the web.config file (there is a sample one avalable with the source code) to `C:\inetpub\wwwroot\angular-wallboard\`
+4. Edit your settings. `C:\inetpub\wwwroot\angular-wallboard\assets\settings.json`
+5. Restart the services using **IIS Manager**, select *Default website* and choose "Restart" from the panel on the right.
+
 ## 4 - Building from source
 ## 5 - Feature requests and contributing
 - some screenshots
