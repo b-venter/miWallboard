@@ -43,5 +43,19 @@ In the `assets` folder is a file called **settings.json**. Here is what each ent
 5. Restart the services using **IIS Manager**, select *Default website* and choose "Restart" from the panel on the right.
 
 ## 4 - Building from source
+[Reference link](https://stackoverflow.com/a/52139544/14369396)
+So you are a (budding?) developer and would like to play around? Go for it! And if you would like to share some cool accomplishment, **please** check point 5. Co-developers are always welcome. But I digress.  
+- clone this project
+- once extracted, `cd 'project name'`  
+- `npm install`
+- And now you can work / serve it (`ng serve`)
+
 ## 5 - Feature requests and contributing
+At the moment, this is a small project. So contributing is simple:
+1. Open an issue with your suggestion
+2. Once a way forward has been agreed and approved, do a pull request with your changes.
+
+*Please note that some developers have strong opinions while other developers might just be starting out. Mutual respect, good explanations, a modicum of patience and a good sense of humour can go a long way in promoting a healthy, developer environment.*
+
+
 - some screenshots
