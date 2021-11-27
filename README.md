@@ -50,12 +50,14 @@ In the `assets` folder is a file called **settings.json**. Here is what each ent
 5. Restart the services using **IIS Manager**, select *Default website* and choose "Restart" from the panel on the right.
 
 ## 4 - Building from source
-[Reference link](https://stackoverflow.com/a/52139544/14369396)
-So you are a (budding?) developer and would like to play around? Go for it! And if you would like to share some cool accomplishment, **please** check point 5. Co-developers are always welcome. But I digress.  
+[Reference link](https://stackoverflow.com/a/52139544/14369396)  
+So you are a (budding?) developer and would like to play around? Go for it! And if you would like to share some cool accomplishment, **please** check point 5. Co-developers are always welcome. But I digress.   
 - clone this project
 - once extracted, `cd 'project name'`  
 - `npm install`
 - And now you can work / serve it (`ng serve`)
+
+Note that the above assumes that you have a Node and Angular environment already set up.  
 
 ## 5 - Feature requests and contributing
 At the moment, this is a small project. So contributing is simple:
