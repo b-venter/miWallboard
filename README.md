@@ -1,7 +1,7 @@
 # miWallboard
 Quite simply, this is a wallboard for Mitel's MiContact Center Business (MiCCB). It provides an easier overview of the contact center's current status and that of the agents. It uses the REST API provided by MiCCB. Being an Angular app, it can be hosted by most web servers. Once a browser like Firefox or Chrome loads the "page", it actually runs from the browser, being as it is a Single Page Application.  
   
-You can grab the latest [release](./releases). Below you will find instructions on installation and settings.
+You can grab the latest [release](https://github.com/b-venter/miWallboard/releases). Below you will find instructions on installation and settings.
 
 1. [Setting up an API user on MiCCB](#1---setting-up-an-api-user-on-miccb)
 2. [Wallboard settings](#2---wallboard-settings)
