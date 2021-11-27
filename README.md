@@ -58,4 +58,8 @@ At the moment, this is a small project. So contributing is simple:
 *Please note that some developers have strong opinions while other developers might just be starting out. Mutual respect, good explanations, a modicum of patience and a good sense of humour can go a long way in promoting a healthy, developer environment.*
 
 
-- some screenshots
+## 6 - Screenshots
+![Screenshot_20211124_083923](https://user-images.githubusercontent.com/52171108/143687814-598b99ac-a1d1-4f71-9c66-596f41d2b1e5.png)
+![Screenshot_20211124_084004](https://user-images.githubusercontent.com/52171108/143687818-08e22034-51dc-4256-9333-3f29a39260a0.png)
+![Screenshot_20211124_084016](https://user-images.githubusercontent.com/52171108/143687820-dcf298f3-0326-4457-ada0-d6acc351dcd8.png)
+![Screenshot_20211124_084921](https://user-images.githubusercontent.com/52171108/143687823-5c116819-887c-44b2-bef5-8addc554abc5.png)
