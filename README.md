@@ -4,11 +4,11 @@ Quite simply, this is a wallboard for Mitel's MiContact Center Business (MiCCB).
 Below you will find instructions on installation and settings.
 
 1. [Setting up an API user on MiCCB](#1---setting-up-an-api-user-on-miccb)
-2. [Wallboard settings]()
-3. [Hosting with IIS]()
-4. [Building from source]()
-5. [Feature requests and contributing]()
-6. [Screenshots]()
+2. [Wallboard settings](#2---wallboard-settings)
+3. [Hosting with IIS](#3---hosting-with-iis)
+4. [Building from source](#4---building-from-source)
+5. [Feature requests and contributing](#5---feature-requests-and-contributing)
+6. [Screenshots](#6---screenshots)
 
 ## 1 - Setting up an API user on MiCCB
 While you could run this using your admin user, that is just a **bad idea** on so many levels. Therefore, to encourage good security, here is a step-by-step guide on how you can create a user just for the wallboard with only as much as access as needed (which, if you are curious, is very little).
