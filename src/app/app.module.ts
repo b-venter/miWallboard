@@ -20,6 +20,7 @@ import { ConnectComponent } from './connect/connect.component';
 import { APP_INITIALIZER } from '@angular/core';
 import { AppConfig }       from './app.config';
 import { Observable } from 'rxjs';
+import { FooterComponent } from './footer/footer.component';
 
 function initConfig(config: AppConfig): () => Observable<any>{
   return () => config.load();
@@ -31,7 +32,8 @@ function initConfig(config: AppConfig): () => Observable<any>{
     HomeComponent,
     PageNotFoundComponent,
     NavbarComponent,
-    ConnectComponent
+    ConnectComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
