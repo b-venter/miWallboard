@@ -173,6 +173,7 @@ export interface QueuesStateLinks {
     self: Self;
 }
 
+/*Used when importing the settings.json file */
 export interface settingsFile {
     refreshTime: number;
     serverUrl: string;
