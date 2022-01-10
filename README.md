@@ -38,6 +38,8 @@ In the `assets` folder is a file called **settings.json**. Here is what each ent
 `"apiPassword":` Also as per the password you created for said user.  
 `"activeQ":` If you have multiple queues, the wallboard will retrieve them in a list - starting with 0. Leave as is to start with. Once the wallboard is connected and running, you will be able to see a list of each queue and its associated position.  
 `"wallBanner":` Change at will.  
+`"answeredAsPercent":` Set to `true` (no  quotes "") if you want answered statistics to be displayed as a percentage value normally. By default it is set to false. Can be toggled in the app, but this will return to default on a reload/refresh.  
+`"abandonedAsPercent":` Set to `true` (no  quotes "") if you want abandoned statistics to be displayed as a percentage value normally. By default it is set to false. Can be toggled in the app, but this will return to default on a reload/refresh.  
 
 ## 3 - Hosting with IIS
 [Reference link](https://devblogs.microsoft.com/premier-developer/tips-for-running-an-angular-app-in-iis/)  
