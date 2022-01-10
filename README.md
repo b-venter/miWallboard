@@ -50,6 +50,7 @@ In the `assets` folder is a file called **settings.json**. Here is what each ent
 3. Upload the web.config file (there is a sample one avalable with the source code) to `C:\inetpub\wwwroot\angular-wallboard\` (i.e., it will be in the `angular-wallboard\` directory alongside index.html)
 4. Edit your settings. `C:\inetpub\wwwroot\angular-wallboard\assets\settings.json`
 5. Restart the services using **IIS Manager**, select *Default website* and choose "Restart" from the panel on the right.
+6. When adding a new release, always keep a backup of the *settings.json* file, since the upgraded package will replace your custom file with the one provided by default.
 
 ## 4 - Building from source
 [Reference link](https://stackoverflow.com/a/52139544/14369396)  
