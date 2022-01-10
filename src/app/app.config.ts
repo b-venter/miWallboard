@@ -14,7 +14,9 @@ export class AppConfig {
         apiUsername: "test",
         apiPassword: "somethingstrong",
         activeQ: 0,
-        wallBanner: "MiCCB Wallboard"
+        wallBanner: "MiCCB Wallboard",
+        answeredAsPercent: false,
+        abandonedAsPercent: false
     }
 
     private file: string = "./assets/settings.json";
