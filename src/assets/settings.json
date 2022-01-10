@@ -4,5 +4,7 @@
     "apiUsername": "user",
     "apiPassword": "password",
     "activeQ": 0,
-    "wallBanner": "miWallboard for Mitel MiCC-B"
+    "wallBanner": "miWallboard for Mitel MiCC-B",
+    "answeredAsPercent": false,
+    "abandonedAsPercent": false
 }

@@ -115,6 +115,8 @@ export class HomeComponent implements OnInit {
   }
 
   aQ: number = this.config.getConfig().activeQ; //active Queue chosen to view. Default is zero
+  answP: boolean = this.config.getConfig().answeredAsPercent || false; //Answered calls as percent (true) or actual number (false)
+  abndP: boolean = this.config.getConfig().abandonedAsPercent || false; //Abandoned calls as percent (true) or actual number (false)
 
   ngOnInit(): void {
     this.agentsState();
@@ -220,6 +222,20 @@ export class HomeComponent implements OnInit {
     //Select other Queue's stats
     qSelect(q: number){
       this.aQ = q;
+    }
+
+    //View as percent or not
+    vSelectP(t: boolean, a: string){
+      if (a == "all"){
+        this.answP = t;
+        this.abndP = t;
+      }
+      else if (a == "answP") {
+        this.answP = t;
+      }
+      else if (a == "abndP") {
+        this.abndP = t;
+      }
     }
 
 }

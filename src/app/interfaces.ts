@@ -181,4 +181,6 @@ export interface settingsFile {
     apiPassword: string;
     activeQ: number;
     wallBanner: string;
+    answeredAsPercent: boolean;
+    abandonedAsPercent: boolean;
 }

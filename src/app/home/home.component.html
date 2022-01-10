@@ -17,8 +17,10 @@
                             <g class="donut-text donut-text-1">
                                 
                                 <text y="50%" transform="translate(0, 2)">
+                                    <!--Interpolate answered number value here-->
+                                    <tspan *ngIf="!answP" x="50%" text-anchor="middle" class="donut-percent">{{q[aQ].answeredConversationsByAgentGroup1Today}}</tspan>   
                                     <!--Interpolate answered percent value here-->
-                                    <tspan x="50%" text-anchor="middle" class="donut-percent">{{q[aQ].answeredConversationsByAgentGroup1Today}}</tspan>   
+                                    <tspan *ngIf="answP" x="50%" text-anchor="middle" class="donut-percent">{{anF | number:'1.0-0'}}%</tspan>   
                                 </text>
                                 <text y="60%" transform="translate(0, 2)">
                                     <!--interpolate total offered value here-->
@@ -59,8 +61,10 @@
                             <g class="donut-text donut-text-1">
                                 
                                 <text y="50%" transform="translate(0, 2)">
+                                    <!--Interpolate abandoned number value here-->
+                                    <tspan *ngIf="!abndP" x="50%" text-anchor="middle" class="donut-percent">{{q[aQ].abandonedConversationsToday}}</tspan>   
                                     <!--Interpolate abandoned percent value here-->
-                                    <tspan x="50%" text-anchor="middle" class="donut-percent">{{q[aQ].abandonedConversationsToday}}</tspan>   
+                                    <tspan *ngIf="abndP" x="50%" text-anchor="middle" class="donut-percent">{{abF | number:'1.0-0'}}%</tspan>   
                                 </text>
                                 <text y="60%" transform="translate(0, 2)">
                                     <!--interpolate total offered value here-->
@@ -103,6 +107,23 @@
                 {{q[aQ].name}} 
                 <mat-menu #menuQ="matMenu">
                     <button *ngFor="let a of queuesStateDbcnv._embedded.items; let i = index" mat-menu-item (click)="qSelect(i)">{{i}} - {{a.name}}</button>
+                    <button mat-menu-item [matMenuTriggerFor]="viewOpts">View options</button>
+                </mat-menu>
+                <mat-menu #viewOpts="matMenu" yPosition="above">
+                    <button mat-menu-item [matMenuTriggerFor]="answOpts">Answered calls</button>
+                    <button mat-menu-item [matMenuTriggerFor]="abandOpts">Abandoned calls</button>
+                </mat-menu>
+                <mat-menu #answOpts="matMenu" [ngSwitch]="answP">
+                    <button mat-menu-item *ngSwitchCase="true">&check; As percentage</button>
+                    <button mat-menu-item *ngSwitchCase="true" (click)="vSelectP(false, 'answP')">As number</button>
+                    <button mat-menu-item *ngSwitchCase="false" (click)="vSelectP(true, 'answP')">As percentage</button>
+                    <button mat-menu-item *ngSwitchCase="false">&check; As number</button>
+                </mat-menu>
+                <mat-menu #abandOpts="matMenu" [ngSwitch]="abndP">
+                    <button mat-menu-item *ngSwitchCase="true">&check; As percentage</button>
+                    <button mat-menu-item *ngSwitchCase="true" (click)="vSelectP(false, 'abndP')">As number</button>
+                    <button mat-menu-item *ngSwitchCase="false" (click)="vSelectP(true, 'abndP')">As percentage</button>
+                    <button mat-menu-item *ngSwitchCase="false">&check; As number</button>
                 </mat-menu>
             </span>
         </mat-grid-tile-header>
