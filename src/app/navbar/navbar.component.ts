@@ -21,23 +21,21 @@ export class NavbarComponent implements OnInit {
   boardBanner = this.config.getConfig().wallBanner || "MiContact Center Business Wallboard";
 
     //Quick access to token
-  shToken: string | null = this.dataService.oauthtkn;
+  shToken = this.dataService.oauthtkn();
 
   ngOnInit(): void {}
 
   initConnect() {
     this.dataService.getToken();
-    this. shToken = this.dataService.oauthtkn;
   }
 
   clearConn(){
     this.dataService.delToken();
-    this. shToken = this.dataService.oauthtkn;
   }
 
   checkToken() {
     if (this.dataService.oauthtkn){
-      return of<string>(this.dataService.oauthtkn);
+      return this.dataService.oauthtkn();
     }
     return of(null);
   }
