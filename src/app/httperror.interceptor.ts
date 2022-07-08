@@ -31,6 +31,7 @@ export class HttperrorInterceptor implements HttpInterceptor {
       retry(1),
       catchError((error) => {
         if (error.status == 401) {
+        //Use the function in data.service rather because (1) it bypasses Intercept requests with HttpBackend, and (2) needs to be available for manual clear (navbar)
           this.dataService.getToken();
         } else  {
           //Stop polling. Components can subscribe to stopPolling to see whether 
