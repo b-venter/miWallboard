@@ -17,7 +17,7 @@ export class ConnectComponent implements OnInit {
 
   checkToken() {
     if (this.dataService.oauthtkn){
-      return of<string>(this.dataService.oauthtkn);
+      return this.dataService.oauthtkn();
     }
     return of(null);
   }

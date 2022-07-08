@@ -1,7 +1,7 @@
 <mat-grid-list cols="2" rowHeight="1:0.8">
     <!--LEFT GRID-->
     <!--Queues states-->
-    <mat-grid-tile class="queue-tile">
+    <mat-grid-tile *ngIf="queuesStateDbcnv" class="queue-tile">
         <div class="q-grid">
             <!--nested grid-->
             <mat-grid-list cols="3" rowHeight="1:1.4">
@@ -101,7 +101,7 @@
         </div>
         <mat-grid-tile-header class="tile-header-q">
             <span>
-                <button mat-icon-button [matMenuTriggerFor]="menuQ">
+                <button *ngIf="queuesStateDbcnv" mat-icon-button [matMenuTriggerFor]="menuQ">
                     <mat-icon>more_vert</mat-icon>
                 </button> 
                 {{q[aQ].name}} 
@@ -131,7 +131,7 @@
     
     <!--RIGHT GRID-->
     <!--Agents states-->
-    <mat-grid-tile class="agents-tile">
+    <mat-grid-tile *ngIf="agentsStateDbcnv" class="agents-tile">
         <div>
             <div class="agents">
                 <div *ngFor="let d of agentsStateDbcnv._embedded.items" class="agent-ind">

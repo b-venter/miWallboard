@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpBackend } from '@angular/common/http';
 
 import { settingsFile } from './interfaces';
 import { Observable } from 'rxjs';
@@ -21,7 +21,12 @@ export class AppConfig {
 
     private file: string = "./assets/settings.json";
 
-    constructor(private http: HttpClient) { }
+    private http: HttpClient
+
+    //About this solution: https://stackoverflow.com/a/49013534
+    constructor(handler: HttpBackend) {
+        this.http = new HttpClient(handler);
+     }
 
     /**
      * Use to get the data found in the config file

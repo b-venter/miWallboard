@@ -237,5 +237,6 @@ export class HomeComponent implements OnInit {
         this.abndP = t;
       }
     }
+    
 
 }

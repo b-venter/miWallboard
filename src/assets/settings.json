@@ -1,10 +1,10 @@
 {
-    "refreshTime": 30,
-    "serverUrl": "10.20.30.40",
-    "apiUsername": "user",
-    "apiPassword": "password",
+    "refreshTime": 15,
+    "serverUrl": "10.49.0.13",
+    "apiUsername": "wallboard",
+    "apiPassword": "abTyefAdarchesh0",
     "activeQ": 0,
-    "wallBanner": "miWallboard for Mitel MiCC-B",
-    "answeredAsPercent": false,
-    "abandonedAsPercent": false
+    "wallBanner": "Entrepo miWallboard for Mitel MiCC-B",
+    "answeredAsPercent": true,
+    "abandonedAsPercent": true
 }
