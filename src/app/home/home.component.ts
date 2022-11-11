@@ -32,87 +32,20 @@ export class HomeComponent implements OnInit {
   //service level color
   slc: string = "#fc0303";
 
+  //View agent test
+  agentDetails: number = 0;
+  agentShow: boolean = false;
+
 
   queuesStateDb: any[] = [];
   queuesStateDbcnv!: QueuesState;
-  q: QItem[];
+  q!: QItem[];
 
 
   constructor(
     private dataService: DataService,
     private config: AppConfig,
-  ) {
-    /*Init default values for q, note [] */
-    this.q = [
-      { 
-      _links: {self: {href: ""}, queue: {href: ""}},
-      id: '',
-      abandonedConversationsAverageDurationToday: '',
-      abandonedConversationsInTheLast15Minutes: 0,
-      abandonedConversationsInTheLastHour: 0,
-      abandonedConversationsPercentageInTheLast15Minutes: 0,
-      abandonedConversationsPercentageInTheLastHour: 0,
-      abandonedConversationsPercentageToday: 0,
-      abandonedConversationsToday: 0,
-      agentLoggedInTotalDurationToday: '',
-      agentsAvailable:  0,
-      agentsIdle: 0,
-      agentsOnAcdConversations: 0,
-      agentsOnNonAcdConversations: 0,
-      agentsOnOutboundConversations: 0,
-      agentsUnavailable: 0,
-      agentsUnavailableInTheLast15Minutes: 0,
-      agentsUnavailableInTheLastHour: 0,
-      answeredConversationsAverageDurationInTheLast15Minutes: '',
-      answeredConversationsAverageDurationInTheLastHour: '',
-      answeredConversationsAverageDurationToday: '',
-      answeredConversationsByAgentGroup1Today: 0,
-      answeredConversationsByAgentGroup2Today: 0,
-      answeredConversationsByAgentGroup3Today: 0,
-      answeredConversationsByAgentGroup4Today: 0,
-      answeredConversationsInTheLast15Minutes: 0,
-      answeredConversationsInTheLastHour: 0,
-      answeredConversationsPercentageByAgentGroup1Today: 0,
-      answeredConversationsPercentageByAgentGroup2Today: 0,
-      answeredConversationsPercentageByAgentGroup3Today: 0,
-      answeredConversationsPercentageByAgentGroup4Today: 0,
-      answeredConversationsPercentageInTheLast15Minutes: 0,
-      answeredConversationsPercentageInTheLastHour: 0,
-      answeredConversationsPercentageToday: 0,
-      answeredConversationsToday: 0,
-      conversationAverageDurationInTheLast15Minutes: '',
-      conversationAverageDurationInTheLastHour: '',
-      conversationAverageDurationToday: '',
-      conversationTotalDurationToday: '',
-      estimatedWaitTimeForNewConversations: '',
-      interflowedConversationsInTheLast15Minutes: 0,
-      interflowedConversationsInTheLastHour: 0,
-      interflowedConversationsToday: 0,
-      isInDoNotDisturb: false,
-      longestWaitingConversationDuration: '',
-      longestWaitingStartedTime: new Date(0),
-      longestWaitingStartedTimeMediaServerId: '',
-      makeBusyTotalDurationToday: '',
-      offeredConversationsInTheLast15Minutes: 0,
-      offeredConversationsInTheLastHour: 0,
-      offeredConversationsToday: 0,
-      name: '',
-      reporting: '',
-      isGroup: false,
-      mediaType: '',
-      requeuedConversationsToday:  0,
-      serviceLevelPercentageInTheLast15Minutes: 0,
-      serviceLevelPercentageInTheLastHour: 0,
-      serviceLevelPercentageToday: 0,
-      serviceLevelGoalPercentage: 0,
-      timeOfLastReceivedUpdate: new Date(0),
-      transfersToUnavailableQueue: 0,
-      transfersToUnavailableQueueTotalToday: 0,
-      waitingConversations: 0,
-      workTimerTotalDurationToday: '',
-      _embedded: {}
-    }]
-  }
+  ) {}
 
   aQ: number = this.config.getConfig().activeQ; //active Queue chosen to view. Default is zero
   answP: boolean = this.config.getConfig().answeredAsPercent || false; //Answered calls as percent (true) or actual number (false)
@@ -237,6 +170,12 @@ export class HomeComponent implements OnInit {
         this.abndP = t;
       }
     }
+
+    //agentDetails
+    setAgentDetails(a: number) {
+      this.agentDetails = a;
+      this.agentShow = true;
+    }      
     
 
 }
