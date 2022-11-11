@@ -1,0 +1,10 @@
+{
+    "refreshTime": 30,
+    "serverUrl": "10.20.30.40",
+    "apiUsername": "user",
+    "apiPassword": "password",
+    "activeQ": 0,
+    "wallBanner": "miWallboard for Mitel MiCC-B",
+    "answeredAsPercent": false,
+    "abandonedAsPercent": false
+}

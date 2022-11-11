@@ -99,6 +99,7 @@
                 </mat-grid-tile>
             </mat-grid-list>
         </div>
+
         <mat-grid-tile-header class="tile-header-q">
             <span>
                 <button *ngIf="queuesStateDbcnv" mat-icon-button [matMenuTriggerFor]="menuQ">
@@ -131,24 +132,24 @@
     
     <!--RIGHT GRID-->
     <!--Agents states-->
-    <mat-grid-tile *ngIf="agentsStateDbcnv" class="agents-tile">
-        <div>
+    <mat-grid-tile *ngIf="agentsStateDbcnv" class="agents">
+        <div *ngIf="!agentShow; else agentDetailDiv">
             <div class="agents">
-                <div *ngFor="let d of agentsStateDbcnv._embedded.items" class="agent-ind">
+                <div *ngFor="let d of agentsStateDbcnv._embedded.items; let i=index" class="agent-ind">
                     <div [ngSwitch]="d.currentState">
                         <!--https://stackoverflow.com/questions/52558611/angular-6-grid-tiles-line-breaks-->
                         <!--https://stackoverflow.com/questions/46639498/style-border-error-in-angular4-->
-                        <img *ngSwitchCase="'LoggedOut'" src="./assets/blank_avatar.png" class="agent-pic agent-loggedout" matTooltip="{{d.currentState}}">
-                        <img *ngSwitchCase="'Idle'" src="./assets/blank_avatar.png" class="agent-pic agent-idle" matTooltip="{{d.currentState}}">
-                        <img *ngSwitchCase="'MakeBusy'" src="./assets/blank_avatar.png" class="agent-pic agent-makebusy" matTooltip="{{d.currentState}}">
-                        <img *ngSwitchCase="'Acd'" src="./assets/blank_avatar.png" class="agent-pic agent-acd" matTooltip="{{d.currentState}}">
-                        <img *ngSwitchCase="'NonAcd'" src="./assets/blank_avatar.png" class="agent-pic agent-nonacd" matTooltip="{{d.currentState}}">
-                        <img *ngSwitchCase="'WorkTimer'" src="./assets/blank_avatar.png" class="agent-pic agent-worktimer" matTooltip="{{d.currentState}}">
-                        <img *ngSwitchCase="'Incoming'" src="./assets/blank_avatar.png" class="agent-pic agent-ringing" matTooltip="{{d.currentState}}">
-                        <img *ngSwitchCase="'AcdHold'" src="./assets/blank_avatar.png" class="agent-pic agent-acdhold" matTooltip="{{d.currentState}}">
-                        <img *ngSwitchCase="'Outbound'" src="./assets/blank_avatar.png" class="agent-pic agent-outb" matTooltip="{{d.currentState}}">
+                        <img *ngSwitchCase="'LoggedOut'" src="./assets/blank_avatar.png" class="agent-pic agent-loggedout" matTooltip="{{d.currentState}}" (click)="setAgentDetails(i)">
+                        <img *ngSwitchCase="'Idle'" src="./assets/blank_avatar.png" class="agent-pic agent-idle" matTooltip="{{d.currentState}}" (click)="setAgentDetails(i)">
+                        <img *ngSwitchCase="'MakeBusy'" src="./assets/blank_avatar.png" class="agent-pic agent-makebusy" matTooltip="{{d.currentState}}" (click)="setAgentDetails(i)">
+                        <img *ngSwitchCase="'Acd'" src="./assets/blank_avatar.png" class="agent-pic agent-acd" matTooltip="{{d.currentState}}" (click)="setAgentDetails(i)">
+                        <img *ngSwitchCase="'NonAcd'" src="./assets/blank_avatar.png" class="agent-pic agent-nonacd" matTooltip="{{d.currentState}}" (click)="setAgentDetails(i)">
+                        <img *ngSwitchCase="'WorkTimer'" src="./assets/blank_avatar.png" class="agent-pic agent-worktimer" matTooltip="{{d.currentState}}" (click)="setAgentDetails(i)">
+                        <img *ngSwitchCase="'Incoming'" src="./assets/blank_avatar.png" class="agent-pic agent-ringing" matTooltip="{{d.currentState}}" (click)="setAgentDetails(i)">
+                        <img *ngSwitchCase="'AcdHold'" src="./assets/blank_avatar.png" class="agent-pic agent-acdhold" matTooltip="{{d.currentState}}" (click)="setAgentDetails(i)">
+                        <img *ngSwitchCase="'Outbound'" src="./assets/blank_avatar.png" class="agent-pic agent-outb" matTooltip="{{d.currentState}}" (click)="setAgentDetails(i)">
                         <!--Default if state not of the above-->
-                        <img *ngSwitchDefault src="./assets/blank_avatar.png" class="agent-pic" matTooltip="{{d.currentState}}">
+                        <img *ngSwitchDefault src="./assets/blank_avatar.png" class="agent-pic" matTooltip="{{d.currentState}}" (click)="setAgentDetails(i)">
                         <p>
                             {{d.firstName}} {{d.lastName}}
                             <br>
@@ -158,6 +159,30 @@
                 </div>
             </div>
         </div>
+        <ng-template #agentDetailDiv>
+            <div *ngIf="agentDetails !== null">
+                <button mat-flat-button color="warn" (click)="agentShow = false">Close</button>
+                <br><span class="agent-details-label">Agent ID: </span> <span class="agent-details-data">{{agentsStateDbcnv._embedded.items[agentDetails].id}}</span>
+                <br><span class="agent-details-label">Name: </span> <span class="agent-details-data">{{agentsStateDbcnv._embedded.items[agentDetails].firstName}}&nbsp;{{agentsStateDbcnv._embedded.items[agentDetails].lastName}}</span>
+                <br><span class="agent-details-label">Current state: </span> <span class="agent-details-data">{{agentsStateDbcnv._embedded.items[agentDetails].currentState}}</span>
+                <br><span class="agent-details-label">ACD conversations today: </span> <span class="agent-details-data">{{agentsStateDbcnv._embedded.items[agentDetails].acdConversationsToday}}</span>
+                <br><span class="agent-details-label">Average time: </span> <span class="agent-details-data">{{agentsStateDbcnv._embedded.items[agentDetails].averageTime}}</span>
+                <br><span class="agent-details-label">Current Work timer: </span> <span class="agent-details-data">{{agentsStateDbcnv._embedded.items[agentDetails].currentWorktimer}}</span>
+                <br><span class="agent-details-label">DND time for the day: </span> <span class="agent-details-data">{{agentsStateDbcnv._embedded.items[agentDetails].doNotDisturbDurationToday}}</span>
+                <br><span class="agent-details-label">External answer time: </span> <span class="agent-details-data">{{agentsStateDbcnv._embedded.items[agentDetails].externalAnswerDurationToday}}</span>
+                <br><span class="agent-details-label">ACD Hold total time: </span> <span class="agent-details-data">{{agentsStateDbcnv._embedded.items[agentDetails].holdAcdDurationToday}}</span>
+                <br><span class="agent-details-label">Logged in total time: </span> <span class="agent-details-data">{{agentsStateDbcnv._embedded.items[agentDetails].loggedInDurationToday}}</span>
+                <br><span class="agent-details-label">Not present total time: </span> <span class="agent-details-data">{{agentsStateDbcnv._embedded.items[agentDetails].loggedInNotPresentDurationToday}}</span>
+                <br><span class="agent-details-label">Make Busy total time: </span> <span class="agent-details-data">{{agentsStateDbcnv._embedded.items[agentDetails].makeBusyDurationToday}}</span>
+                <br><span class="agent-details-label">Outbound total time: </span> <span class="agent-details-data">{{agentsStateDbcnv._embedded.items[agentDetails].outboundDurationToday}}</span>
+                <br><span class="agent-details-label">Member of Agent Groups: </span> <span class="agent-details-data">{{agentsStateDbcnv._embedded.items[agentDetails].presentInAgentGroups}}</span>
+                <br><span class="agent-details-label">Make Busy reason: </span> <span class="agent-details-data">{{agentsStateDbcnv._embedded.items[agentDetails].reason}}</span>
+                <br><span class="agent-details-label">ACD total time: </span> <span class="agent-details-data">{{agentsStateDbcnv._embedded.items[agentDetails].totalAcdDuration}}</span>
+                <br><span class="agent-details-label">Work timer total time: </span> <span class="agent-details-data">{{agentsStateDbcnv._embedded.items[agentDetails].workTimerDurationToday}}</span>
+
+            </div>
+            
+        </ng-template>
         <mat-grid-tile-header class="tile-header-q">
             <span>Agents</span>
         </mat-grid-tile-header>
