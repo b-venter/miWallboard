@@ -8,7 +8,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { NavbarComponent } from './navbar/navbar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -29,33 +29,27 @@ function initConfig(config: AppConfig): () => Observable<any>{
   return () => config.load();
 }
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent,
-    PageNotFoundComponent,
-    NavbarComponent,
-    ConnectComponent,
-    FooterComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    BrowserAnimationsModule,
-    HttpClientModule,
-    MatGridListModule,
-    MatToolbarModule,
-    MatTooltipModule,
-    MatIconModule,
-    MatMenuModule,
-    MatButtonModule,
-    MatSnackBarModule,
-  ],
-  providers: [
-    AppConfig,
-    { provide: APP_INITIALIZER, useFactory: initConfig, deps: [AppConfig], multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: HttperrorInterceptor, multi: true }
-  ],
-  bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [
+        AppComponent,
+        HomeComponent,
+        PageNotFoundComponent,
+        NavbarComponent,
+        ConnectComponent,
+        FooterComponent
+    ],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        AppRoutingModule,
+        BrowserAnimationsModule,
+        MatGridListModule,
+        MatToolbarModule,
+        MatTooltipModule,
+        MatIconModule,
+        MatMenuModule,
+        MatButtonModule,
+        MatSnackBarModule], providers: [
+        AppConfig,
+        { provide: APP_INITIALIZER, useFactory: initConfig, deps: [AppConfig], multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: HttperrorInterceptor, multi: true },
+        provideHttpClient(withInterceptorsFromDi())
+    ] })
 export class AppModule { }
