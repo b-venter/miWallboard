@@ -7,9 +7,10 @@ import { DataService } from '../data.service';
 import { AppConfig } from '../app.config';
 
 @Component({
-  selector: 'app-navbar',
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+    selector: 'app-navbar',
+    templateUrl: './navbar.component.html',
+    styleUrls: ['./navbar.component.scss'],
+    standalone: false
 })
 export class NavbarComponent implements OnInit {
 

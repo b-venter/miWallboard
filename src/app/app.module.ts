@@ -1,4 +1,4 @@
-import { NgModule, ErrorHandler } from '@angular/core';
+import { NgModule, ErrorHandler, inject, provideAppInitializer } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -20,7 +20,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { ConnectComponent } from './connect/connect.component'; 
 
 import { HttperrorInterceptor } from './httperror.interceptor'; 
-import { APP_INITIALIZER } from '@angular/core';
+
 import { AppConfig }       from './app.config';
 import { Observable } from 'rxjs';
 import { FooterComponent } from './footer/footer.component';
@@ -48,7 +48,10 @@ function initConfig(config: AppConfig): () => Observable<any>{
         MatButtonModule,
         MatSnackBarModule], providers: [
         AppConfig,
-        { provide: APP_INITIALIZER, useFactory: initConfig, deps: [AppConfig], multi: true },
+        provideAppInitializer(() => {
+        const initializerFn = (initConfig)(inject(AppConfig));
+        return initializerFn();
+      }),
         { provide: HTTP_INTERCEPTORS, useClass: HttperrorInterceptor, multi: true },
         provideHttpClient(withInterceptorsFromDi())
     ] })
